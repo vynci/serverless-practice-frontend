@@ -1,0 +1,63 @@
+<div>
+  <div>
+      <button *ngIf="!isShowPetForm" type="button" class="btn btn-primary btn-block btn-sm" (click)="showPetForm()">Add a pet</button>
+      <button *ngIf="isShowPetForm" type="button" class="btn btn-light btn-block btn-sm" (click)="hidePetForm()">Cancel</button>
+  </div>
+  <br>
+  <div *ngIf="isShowPetForm" class="card pet-form">
+    <div class="card-body">
+      <form (ngSubmit)="submitPet()">
+      <div class="form-group">
+          <label for="exampleInputEmail1">Name</label>
+          <input [(ngModel)]="petForm.name" name="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Scooby">
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Type</label>
+              <input [(ngModel)]="petForm.type" name="type" type="text" class="form-control" id="type" placeholder="Dog">
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="form-group">
+              <label for="exampleInputPassword1">Breed</label>
+              <input [(ngModel)]="petForm.breed" name="breed" type="text" class="form-control" id="breed" placeholder="Great Dane">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+          <label for="exampleInputPassword1">Description</label>
+          <textarea name="breed" [(ngModel)]="petForm.description" type="text" class="form-control" id="description" placeholder="Say something about your pet! :)"></textarea>
+      </div>
+      <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Private</label>
+      </div>
+      <br>
+      <button [disabled]="isSubmitting" class="btn btn-success btn-block btn-sm" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+
+  <div>
+    <div *ngIf="isLoading" class="loading-container">Loading...</div>
+    <div *ngIf="!isLoading && !pets.length" class="loading-container">You have no pets yet. Add one now! :)</div>
+    <div class="card pet-card" *ngFor="let pet of pets">
+        <div class="card-header">
+          {{pet.owner}}
+        </div>
+        <img class="card-img-top" src="https://www.dogzhealth.com/wp-content/uploads/beagle.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{pet.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{pet.type}} - {{pet.breed}}</h6>
+          <p class="card-text">
+            {{pet.description || 'No Description'}}
+          </p>
+          <div class="pet-card-action-buttons">
+              <button class="btn btn-info btn-sm">Edit</button>
+              <button (click)="deletePet(pet)" class="btn btn-danger btn-sm">Delete</button>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

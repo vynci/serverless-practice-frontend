@@ -1,0 +1,24 @@
+<div>
+  <div>
+    <div *ngIf="isLoading" class="loading-container">Loading...</div>
+    <div *ngIf="!isLoading && !pets.length" class="loading-container">Empty List</div>
+
+    <div class="card pet-card" *ngFor="let pet of pets">
+        <div class="card-header">
+          {{pet.owner}}
+        </div>
+        <img class="card-img-top" src="https://www.dogzhealth.com/wp-content/uploads/beagle.jpg" alt="Card image cap">
+        <div class="card-body">
+          <h5 class="card-title">{{pet.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{pet.type}} - {{pet.breed}}</h6>
+          <p class="card-text">
+            {{pet.description || 'No Description'}}
+          </p>
+          <div class="pet-card-action-buttons">
+              <button class="btn btn-info btn-sm">Like</button>
+          </div>
+        </div>
+    </div>
+  </div>
+
+</div>

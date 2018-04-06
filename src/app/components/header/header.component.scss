@@ -1,0 +1,43 @@
+
+$topnav-background-color: #fff;
+.topnav {
+    border-radius: 0;
+    background-color: $topnav-background-color;
+    padding : 6px;
+    z-index:2;
+}
+.title-container {
+    padding: 17px 30px;
+
+    span{
+        font-size: 18px;
+        color: #222;
+    }
+}
+.header .navbar {
+    background: $topnav-background-color !important;
+    border-bottom: 1px solid rgba(0,0,0,.0975);    
+    height: 50px;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.nav-profile {
+    padding: 17px 30px;
+}
+
+.nav-search {
+    width: 300px;
+    margin-right: 90px;
+}
+
+a {
+    color: #222;
+    text-decoration: none; /* no underline */
+}
