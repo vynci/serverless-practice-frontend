@@ -2,7 +2,7 @@
 
 <div class="card">
   <div class="card-body">
-    <form (ngSubmit)="login()">
+    <form (ngSubmit)="onLogin()">
     <div class="form-group">
         <label for="exampleInputEmail1">Email address</label>
         <input [(ngModel)]="loginForm.email" name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
@@ -18,5 +18,20 @@
     <br>
     <button type="submit" class="btn btn-primary btn-block">Login</button>
     </form>
+    <br>
+    <button type="submit" class="btn btn-primary btn-block btn-link" (click)="onRegister()">Create Account</button>
+    <br>
+    <div>{{errorMessage}}</div>
   </div>
+</div>
+<br>
+<div *ngIf="showConfirmCard" class="card">
+    <div class="card-body">
+    <div class="form-group">
+        <label for="exampleInputPassword1">Confirmation Code</label>
+        <input [(ngModel)]="confirmationCode" name="confirm-code" type="text" class="form-control" id="exampleInputPassword1" placeholder="Confirmation Code">
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary btn-block btn-link" (click)="onConfirmRegistration()">Confirm</button>
+    </div>
 </div>

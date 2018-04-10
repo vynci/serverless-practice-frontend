@@ -7,6 +7,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {CognitoUtil} from './providers/common-services/cognito.service';
+import {AwsUtil} from './providers/common-services/aws.service';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -19,7 +22,10 @@ import { AppComponent } from './app.component';
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [
+    CognitoUtil,
+    AwsUtil
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
