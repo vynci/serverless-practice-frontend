@@ -11,7 +11,7 @@ import { ChallengeParameters, CognitoCallback, LoggedInCallback } from '../../pr
   styleUrls: ['./login.component.css'],
   providers: [CommonService, UserRegistrationService, UserLoginService]
 })
-export class LoginComponent implements CognitoCallback, OnInit {
+export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit {
 
   constructor(
     private api: CommonService,
@@ -62,7 +62,15 @@ export class LoginComponent implements CognitoCallback, OnInit {
     }
   }
 
+  isLoggedIn(message: string, loggedIn: boolean) {
+    console.log(loggedIn);
+    if (loggedIn) {
+      this.router.navigate(['/account']);
+    }
+  }
+
   ngOnInit() {
+    this.userLogin.isAuthenticated(this);
   }
 
 }

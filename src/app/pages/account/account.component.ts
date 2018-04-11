@@ -1,24 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonService } from '../../providers/common-services/common.service';
+import { ChallengeParameters, CognitoCallback, LoggedInCallback, Callback } from '../../providers/common-services/cognito.service';
+import { UserLoginService } from '../../providers/auth/login.service';
+import { UserParametersService } from '../../providers/auth/parameters.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.css'],
-  providers: [CommonService]
+  providers: [CommonService, UserLoginService, UserParametersService]
 })
-export class AccountComponent implements OnInit {
+export class AccountComponent implements LoggedInCallback, Callback, OnInit {
 
   constructor(
-    private api: CommonService
+    private api: CommonService,
+    private userLogin: UserLoginService,
+    private userParameters: UserParametersService,
+    private router: Router
   ) { }
 
-  public pets: any;
+  private currentUser: string;
+
+  public pets: any = [];
   public petForm: any = {
     name : '',
     type : '',
     breed : '',
-    owner : 'default',
+    owner : this.currentUser,
     description : ''
   };
 
@@ -43,7 +52,7 @@ export class AccountComponent implements OnInit {
       name : '',
       type : '',
       breed : '',
-      owner : 'default',
+      owner : this.currentUser,
       description : ''
     };
   }
@@ -82,8 +91,24 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  callbackWithParam(result: any) {
+    this.currentUser = result[5].Value;
+    this.clearPetForm();
     this.getPets();
+  }
+
+  callback() {}
+
+  isLoggedIn(message: string, loggedIn: boolean) {
+    if (loggedIn) {
+      this.userParameters.getParameters(this);
+    } else {
+      this.router.navigate(['/login']);
+    }
+  }
+
+  ngOnInit() {
+    this.userLogin.isAuthenticated(this);
   }
 
 }

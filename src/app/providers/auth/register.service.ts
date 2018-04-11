@@ -6,9 +6,7 @@ import * as AWS from 'aws-sdk/global';
 @Injectable()
 export class UserRegistrationService {
 
-    constructor(@Inject(CognitoUtil) public cognitoUtil: CognitoUtil) {
-
-    }
+    constructor(@Inject(CognitoUtil) public cognitoUtil: CognitoUtil) {}
 
     register(user: any, callback: CognitoCallback): void {
         console.log("UserRegistrationService: user is " + user);

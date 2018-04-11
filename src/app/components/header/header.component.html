@@ -10,8 +10,15 @@
         <input name="search" type="text" class="form-control" id="search" placeholder="Search...">
     </div>
     <div class="nav-profile">
-      <a [routerLink]="['/login']">
+      <a *ngIf="!loggedIn" [routerLink]="['/login']">
         Login
+      </a>
+      <a *ngIf="loggedIn" [routerLink]="['/account']">
+        My Account
+      </a>
+      <a *ngIf="loggedIn"> <b> • </b> </a>
+      <a style="cursor: pointer;" *ngIf="loggedIn" (click)="logout()">
+        Logout
       </a>
     </div>
   </nav>
