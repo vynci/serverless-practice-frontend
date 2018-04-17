@@ -60,7 +60,7 @@ export class AccountComponent implements LoggedInCallback, Callback, OnInit {
   private getPets() {
     this.isLoading = true;
 
-    this.api.get('pets')
+    this.api.get('pets', {owner:this.currentUser})
     .then(result => {
       this.isLoading = false;
       this.pets = result;

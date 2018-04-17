@@ -16,12 +16,12 @@
         <label class="form-check-label" for="exampleCheck1">Remember me</label>
     </div>
     <br>
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
+    <button type="submit" class="btn btn-primary btn-block">{{loginButtonValue}}</button>
     </form>
     <br>
     <button type="submit" class="btn btn-primary btn-block btn-link" (click)="onRegister()">Create Account</button>
     <br>
-    <div>{{errorMessage}}</div>
+    <div style="text-align:center; color:red">{{errorMessage}}</div>
   </div>
 </div>
 <br>

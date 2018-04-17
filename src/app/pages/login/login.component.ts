@@ -21,6 +21,7 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
   ) { }
 
   public showConfirmCard = false;
+  public loginButtonValue = 'Login';
 
   public loginForm: any = {
     email : '',
@@ -31,6 +32,7 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
   public errorMessage: any;
 
   public onLogin() {
+    this.loginButtonValue = 'Logging in...';
     this.userLogin.authenticate(this.loginForm.email, this.loginForm.password, this);
   }
 
@@ -48,13 +50,11 @@ export class LoginComponent implements CognitoCallback, LoggedInCallback, OnInit
   }
 
   cognitoCallback(message: string, result: any) {
-    console.log(message);
-    console.log(result);
     this.errorMessage = message;
+    this.loginButtonValue = 'Login';
 
     if (message != null) {
       if (message === 'User is not confirmed.') {
-        console.log('hey');
         this.showConfirmCard = true;
       }
     } else {

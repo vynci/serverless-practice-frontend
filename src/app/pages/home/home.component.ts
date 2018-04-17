@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
   private getPets() {
     this.isLoading = true;
 
-    this.api.get('pets')
+    this.api.get('pets', null)
     .then(result => {
       this.isLoading = false;
       this.pets = result;

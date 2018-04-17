@@ -10,8 +10,20 @@ export class CommonService {
 
   constructor(public http: Http) { }
 
-  get(className: string) {
-    const url = this.endpoint + className;
+  get(className: string, filters: any) {
+    let url = this.endpoint + className;
+
+    if (filters ) {
+      let filter = '';
+
+      for (const property in filters) {
+        if (filters.hasOwnProperty(property)) {
+            filter = property + '=' + filters[property];
+        }
+      }
+
+      url = url + '?' + filter;
+    }
 
     return new Promise((resolve, reject) => {
       this.http.get(url)
